@@ -10,7 +10,7 @@ import os
 
 
 with models.DAG(
-    dag_id='KW_NPS_DATA',
+    dag_id='DATA',
     schedule="0 03 * * *",
     start_date = (datetime.today() - timedelta(days=1)),
     catchup=False,
