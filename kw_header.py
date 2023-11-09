@@ -10,7 +10,7 @@ import os
 
 
 with models.DAG(
-    dag_id='KW_NPS_HEADER',
+    dag_id='HEADER',
     schedule="0 02 * * *",
     start_date = (datetime.today() - timedelta(days=1)),
     catchup=False,
@@ -22,7 +22,7 @@ with models.DAG(
         yesterday = (datetime.now() - timedelta(days=1)).strftime('%m-%d-%Y')
         completed_date = yesterday
         headers = {'APIKey': os.environ.get('kw_api_key')}
-        URL = f"https://api.cys.group/public/api/project?projectId=1&versionId=-1&filter=sys_completedDate%20%3E%3D%20'{completed_date}'"
+        URL = f"https://api'{completed_date}'"
         request = requests.get(URL, headers=headers, verify=False)
         res = request.json() 
         return res
@@ -39,9 +39,9 @@ with models.DAG(
 
     def load(df):
         # BigQuery credentials 
-        PROJECT_ID = os.environ.get('kw_project_id')
-        DATASET_ID =  os.environ.get('kw_dataset_id')
-        TABLE = TABLE = os.environ.get('kw_header_table')
+        PROJECT_ID = os.environ.get('project_id')
+        DATASET_ID =  os.environ.get('dataset_id')
+        TABLE = TABLE = os.environ.get('header_table')
         TABLE_ID=f"{PROJECT_ID}.{DATASET_ID}.{TABLE}"
 
         # Construct a BigQuery client object
