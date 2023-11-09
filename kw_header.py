@@ -21,7 +21,7 @@ with models.DAG(
     def extract():
         yesterday = (datetime.now() - timedelta(days=1)).strftime('%m-%d-%Y')
         completed_date = yesterday
-        headers = {'APIKey': os.environ.get('kw_api_key')}
+        headers = {'APIKey': os.environ.get('api_key')}
         URL = f"https://api'{completed_date}'"
         request = requests.get(URL, headers=headers, verify=False)
         res = request.json() 
