@@ -12,7 +12,7 @@ def extract_header():
     yesterday = (datetime.now() - timedelta(days=1)).strftime('%m-%d-%Y')
     completed_date = yesterday
     headers = {'APIKey':'xxxxxxxxxxxxxxx'}
-    URL = f"https://api.cys.group/public/api/project?projectId=1&versionId=-1&filter=sys_completedDate%20%3E%3D%20'{completed_date}'"
+    URL = f"https://'{completed_date}'"
     request = requests.get(URL, headers=headers, verify=False)
     res = request.json() 
     header = res['Data']['Headers']   
@@ -28,7 +28,7 @@ def extract_data():
     headers = {'APIKey': 'xxxxxxxxxxxxxxx'}
     response = pd.DataFrame()  # create an empty DataFrame to hold the data
     while True:
-        URL = f"https://api.cys.group/public/api/project?projectId=1&versionId=-1&filter=sys_completedDate%20%3E%3D%20'{completed_date}'&take={take}&skip={skip}"
+        URL = f"https://api'{completed_date}'&take={take}&skip={skip}"
         request = requests.get(URL, headers=headers, verify=False)
         Response = request.json()
         data = Response['Data']['Data']
@@ -134,11 +134,11 @@ def transform(header, data):
 
 def load(df):
       # BigQuery credentials 
-      PROJECT_ID = "kwantum-omnichannel"
-      DATASET_ID = "kw_business_data"
-      TABLE = "kw_nps_data_test"
+      PROJECT_ID = "xxxx"
+      DATASET_ID = "xxxx"
+      TABLE = "xxxx"
       TABLE_ID=f"{PROJECT_ID}.{DATASET_ID}.{TABLE}"
-      KEY_PATH="/Users/Aibrahim/Desktop/kw-nps/kwantum-omnichannel-8c9e1d9df285.json"
+      KEY_PATH="path/file.json"
                
 
       credentials = service_account.Credentials.from_service_account_file(
