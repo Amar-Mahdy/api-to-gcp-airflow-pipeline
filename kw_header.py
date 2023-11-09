@@ -122,7 +122,7 @@ with models.DAG(
         task_id="END",
         bash_command='echo "THE HOLe PIPELINE ENDED SUCCESSFULLY"; sleep 10',
         dag=dag,
-        trigger_rule="all_done"
+        trigger_rule="Done"
     )
 
     ################################## TASK DEPENDENCIES ##############################
